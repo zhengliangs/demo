@@ -36,12 +36,14 @@
 
     <modules>
         <module>demo-springboot-rabbitmq</module>
+        <module>demo-springboot-elasticsearch</module>
     </modules>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
