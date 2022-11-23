@@ -44,6 +44,7 @@
         <module>demo-mybatis</module>
         <module>demo-rabbitmq</module>
         <module>demo-rocketmq</module>
+        <module>demo-design-mode</module>
     </modules>
 
     <dependencies>
