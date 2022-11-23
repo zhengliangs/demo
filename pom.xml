@@ -45,6 +45,7 @@
         <module>demo-rabbitmq</module>
         <module>demo-rocketmq</module>
         <module>demo-design-mode</module>
+        <module>demo-netty</module>
     </modules>
 
     <dependencies>
