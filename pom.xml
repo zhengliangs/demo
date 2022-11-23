@@ -38,6 +38,7 @@
         <module>demo-springboot-rabbitmq</module>
         <module>demo-springboot-elasticsearch</module>
         <module>demo-aop</module>
+        <module>demo-java</module>
     </modules>
 
     <dependencies>
