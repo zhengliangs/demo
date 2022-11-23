@@ -40,6 +40,7 @@
         <module>demo-aop</module>
         <module>demo-java</module>
         <module>demo-springboot-elastic-job</module>
+        <module>demo-springboot-rocketmq</module>
     </modules>
 
     <dependencies>
