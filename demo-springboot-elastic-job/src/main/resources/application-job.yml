@@ -1,0 +1,66 @@
+elasticjob:
+  # 事件追踪
+  tracing:
+    type: RDB
+  dump:
+    enabled: true
+    port: 9888
+  reg-center:
+    # ip:host 多个用 , 隔开
+    server-lists: 192.168.110.34:2181
+    # zk的命名空间
+    namespace: demo
+    # 等待重试的间隔时间的初始值 单位：毫秒
+    base-sleep-time-milliseconds: 1000
+    # 等待重试的间隔时间的最大值 单位：毫秒
+    max-sleep-time-milliseconds: 3000
+    # 最大重试次数
+    max-retries: 3
+    # 会话超时时间 单位：毫秒
+    session-timeout-milliseconds: 60000
+    # 连接超时时间 单位：毫秒
+    connection-timeout-milliseconds: 15000
+    digest:
+  jobs:
+    fileBackupJob:
+      # 文件备份任务
+      elasticJobClass: com.zhengl.elasticjob.job.DemoJob
+      # cron表达式，用于控制作业触发时间
+      cron: 0 1/1 * * * ?
+      # 作业分片总数
+      shardingTotalCount: 10
+      # 分片序列号和参数，用等号分隔，多个键值对用逗号分隔 分片序列号从0开始，不可大于或等于作业分片总数 如： 0=a,1=b,2=c  0=text,1=image,2=video,3=radio
+      shardingItemParameters: 0=0,1=1,2=2,3=3,4=4,5=5,6=6,7=7,8=8,9=9
+      # 作业分片策略
+      # AVG_ALLOCATION:平均分片策略 如果作业服务器数量与分片总数无法整除，多余的分片将会顺序的分配至每一个作业服务器。
+      # ODEVITY:奇偶分片策略  根据作业名称哈希值的奇偶数决定按照作业服务器 IP 升序或是降序的方式分片。
+      # ROUND_ROBIN:轮询分片策略
+      job-sharding-strategy-type: AVG_ALLOCATION
+      # 设置工作参数。
+      job-parameter: param
+      # 是否开启任务执行失效转移，开启表示如果作业在一次任务执行中途宕机，允许将该次未完成的任务在另一作业节点上补偿执行
+      failover: true
+      # 是否开启错过任务重新执行
+      misfire: true
+      # 设置作业启动时是否将本地配置覆盖到注册中心。 如果启用了覆盖，每次启动都会使用本地配置。
+      overwrite: true
+      # 设置启用或禁用监视器执行。
+      # 对于短间隔作业，最好禁用监视执行以提高性能。
+      # 它不能保证重复取数据，如果禁用监视器执行也不能故障转移，请在工作中保持幂等性。
+      monitor-execution: false
+      # 设置作业服务器和注册中心之间的最大允许时间差秒数
+      # 如果超过最大容忍时间不同的秒，ElasticJob将抛出异常。  -1表示不检查。
+      max-time-diff-seconds: -1
+      # 设置启动时是否禁用job。
+      disabled: false
+      # 设置作业错误处理程序类型。
+#      jobErrorHandlerType: WECHAT
+#      props:
+#        wechat:
+#          # 企业微信机器人的 webhook 地址
+#          webhook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=033c2e51-cd63-4e56-b5ef-6f28b9cc8bfd
+#          # 与企业微信服务器建立连接的超时时间 默认 3000 毫秒
+#          connectTimeoutMilliseconds: 6000
+#          # 从企业微信服务器读取到可用资源的超时时间 默认 5000 毫秒
+#          readTimeoutMilliseconds: 10000
+

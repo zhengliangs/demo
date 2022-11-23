@@ -39,6 +39,7 @@
         <module>demo-springboot-elasticsearch</module>
         <module>demo-aop</module>
         <module>demo-java</module>
+        <module>demo-springboot-elastic-job</module>
     </modules>
 
     <dependencies>

@@ -1,0 +1,12 @@
+server:
+  port: 36000
+  servlet:
+    context-path: /job
+
+spring:
+  profiles:
+    include: job
+
+
+
+
