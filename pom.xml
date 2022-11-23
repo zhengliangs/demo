@@ -43,6 +43,7 @@
         <module>demo-java</module>
         <module>demo-mybatis</module>
         <module>demo-rabbitmq</module>
+        <module>demo-rocketmq</module>
     </modules>
 
     <dependencies>
