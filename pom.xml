@@ -42,6 +42,7 @@
         <module>demo-aop</module>
         <module>demo-java</module>
         <module>demo-mybatis</module>
+        <module>demo-rabbitmq</module>
     </modules>
 
     <dependencies>
