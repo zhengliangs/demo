@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--引入外部配置文件-->
+    <properties resource="config.properties">
+        <property name="username" value="root"/>
+    </properties>
+
+    <settings>
+        <!--标准的日志实现-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!-- 开启二级缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!--设置pojo的别名-->
+    <typeAliases>
+        <!--比较麻烦，需要给每个类设置，但是灵活-->
+        <!--<typeAlias type="com.zhengl.pojo.User" alias="user"/>-->
+
+        <!--直接指定包级，别名是类名称加首字母小写，也可以配合@Alias注解使用-->
+        <package name="com.zhengl.pojo"/>
+    </typeAliases>
+
+    <!--环境配置 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--注册Mapper.xml-->
+    <mappers>
+        <!--Mapper.xml和Mapper接口需要在同一个目录下-->
+        <!--Mapper.xml和Mapper接口名称需要相同-->
+        <!--<mapper class="com.zhengl.mapper.UserDao"/>-->
+        <!--<package name="com.zhengl.mapper"/>-->
+
+        <!--没有限制-->
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/DeptMapper.xml"/>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
+    </mappers>
+</configuration>

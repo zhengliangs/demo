@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhengl.mybatis.mapper.EmployeeMapper">
+
+    <!-- 开启mybatis缓存，缓存的对象需要实现 Serializable 接口 -->
+    <cache/>
+
+    <resultMap id="testConstructorMap" type="employee">
+        <constructor>
+            <idArg column="id" javaType="int"/>
+            <arg column="name" javaType="string"/>
+        </constructor>
+    </resultMap>
+    <select id="testConstructor" parameterType="int" resultMap="testConstructorMap">
+        select * from employee
+    </select>
+
+    <resultMap id="testAssociationMap" type="employee">
+        <id column="id" javaType="int"/>
+        <result column="dept_id" property="deptId" javaType="int"/>
+        <!--
+            如果引用的select语句，不在当前的命名空间中，需要使用命名空间的全限定名。
+            column会被作为参数传递给select语句
+            fetchType懒加载配置，避免 N+1 问题
+        -->
+        <association property="dept" column="dept_id" javaType="dept" fetchType="lazy"
+            select="com.zhengl.mybatis.mapper.DeptMapper.findDeptById"/>
+    </resultMap>
+    <select id="testAssociation" resultMap="testAssociationMap">
+        select * from employee
+    </select>
+
+    <resultMap id="testAssociationResultMap" type="employee">
+        <!--
+            columnPrefix去掉相同的前缀
+            resultMap引用另一个resultMap来映射结果
+        -->
+        <association property="dept" javaType="dept"
+                     columnPrefix="t_" resultMap="com.zhengl.mybatis.mapper.DeptMapper.deptResultMap"/>
+    </resultMap>
+    <select id="testAssociationResult" resultMap="testAssociationResultMap">
+        select
+            t1. id as id,
+            t1.name as name,
+            t1.salary as salary,
+            t1.sex as sex,
+            t2.id as t_dept_id,
+            t2.name as t_dept_name
+        from employee t1
+        left join dept t2 on t1.dept_id = t2.id
+    </select>
+
+    <select id="findByDeptId" resultType="employee" useCache="true">
+        select * from employee where dept_id = #{id}
+    </select>
+
+    <update id="updateEmployeeSalary">
+        update employee set salary = #{salary} where id = #{id}
+    </update>
+</mapper>

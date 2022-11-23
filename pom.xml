@@ -37,10 +37,11 @@
     <modules>
         <module>demo-springboot-rabbitmq</module>
         <module>demo-springboot-elasticsearch</module>
-        <module>demo-aop</module>
-        <module>demo-java</module>
         <module>demo-springboot-elastic-job</module>
         <module>demo-springboot-rocketmq</module>
+        <module>demo-aop</module>
+        <module>demo-java</module>
+        <module>demo-mybatis</module>
     </modules>
 
     <dependencies>
