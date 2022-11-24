@@ -16,7 +16,7 @@ public class TestByteBufferReadWrite {
         buffer.put(new byte[]{0x62, 0x63, 0x64});
         debugAll(buffer);
 
-        // 需要切换到读模式
+        // 需要切换到读模式，不然什么都读不到，因为 position 的值没有变
         buffer.flip();
         debugAll(buffer);
         System.out.println("buffer.get() == " + buffer.get());
