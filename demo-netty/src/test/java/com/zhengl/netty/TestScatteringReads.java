@@ -12,7 +12,7 @@ import static com.zhengl.netty.ByteBufferUtil.debugAll;
  * @author hero良
  * @date 2022/11/24
  */
-public class TestScatteringRead {
+public class TestScatteringReads {
 
     public static void main(String[] args) {
         try (FileChannel channel = new RandomAccessFile("D:\\study\\code\\demo\\demo-netty\\work.txt", "r").getChannel()) {

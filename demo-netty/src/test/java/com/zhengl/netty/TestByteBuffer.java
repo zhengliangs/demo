@@ -32,7 +32,7 @@ public class TestByteBuffer {
                     log.debug("实际字节 = {}", (char) b);
                 }
                 // clear 切换至写模式
-                buffer.clear();
+//                buffer.clear();
                 // 切换至写模式，会压缩没有读完的数据，再次写入的时候不会覆盖掉未读的数据
                 buffer.compact();
             }

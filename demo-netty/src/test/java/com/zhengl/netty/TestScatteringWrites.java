@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
  * @author hero良
  * @date 2022/11/24
  */
-public class TestScatteringWrite {
+public class TestScatteringWrites {
 
     public static void main(String[] args) {
         ByteBuffer buffer1 = StandardCharsets.UTF_8.encode("hello");
