@@ -1,7 +1,8 @@
-package com.zhengl.rabbitmq.deadletter;
+package com.zhengl.rabbitmq.client.listening;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
-import com.zhengl.rabbitmq.pojo.MessageBody;
+import com.zhengl.rabbitmq.client.config.QueueConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -20,23 +21,23 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
-public class Business {
+public class DeadLetter {
 
-    @RabbitListener(queues = DeadLetterConfig.BUSINESS_QUEUE)
-    public void businessQueue(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.DLX_QUEUE)
+    public void dlxQueue(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
-            log.info("businessQueue.msg == {}", msg);
+            log.info("dlxQueue.msg == {}", msg);
             // 模拟异常,拒绝消息
             double dou = 1/0;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             try {
                 if (message.getMessageProperties().getRedelivered()) {
-                    log.info("消息已重复处理失败,拒绝再次接收 businessQueue.msg == {}", msg);
+                    log.info("消息已重复处理失败,拒绝再次接收 dlxQueue.msg == {}", msg);
                     channel.basicReject(deliveryTag, false);
                 } else {
-                    log.info("消息即将再次返回队列处理 businessQueue.msg == {}", msg);
+                    log.info("消息即将再次返回队列处理 dlxQueue.msg == {}", msg);
                     channel.basicNack(deliveryTag, false, true);
                 }
             } catch (IOException e1) {

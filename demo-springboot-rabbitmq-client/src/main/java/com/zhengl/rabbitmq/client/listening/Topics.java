@@ -1,7 +1,7 @@
-package com.zhengl.rabbitmq.topics;
+package com.zhengl.rabbitmq.client.listening;
 
 import com.rabbitmq.client.Channel;
-import com.zhengl.rabbitmq.pojo.MessageBody;
+import com.zhengl.rabbitmq.client.config.QueueConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -25,8 +25,8 @@ import java.io.IOException;
 @Component
 public class Topics {
 
-    @RabbitListener(queues = TopicsConfig.TOPIC_QUEUE_1)
-    public void topicQueue1(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.TOPIC_QUEUE_1)
+    public void topicQueue1(String msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){
@@ -52,8 +52,8 @@ public class Topics {
         }
     }
 
-    @RabbitListener(queues = TopicsConfig.TOPIC_QUEUE_2)
-    public void topicQueue2(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.TOPIC_QUEUE_2)
+    public void topicQueue2(String msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){

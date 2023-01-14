@@ -1,6 +1,7 @@
-package com.zhengl.rabbitmq.retry;
+package com.zhengl.rabbitmq.client.listening;
 
 import com.rabbitmq.client.Channel;
+import com.zhengl.rabbitmq.client.config.QueueConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Retry {
 
-    @RabbitListener(queues = "retry")
+    @RabbitListener(queues = QueueConstant.RETRY)
     public void retry(String msg, Channel channel, Message message){
         log.info("  retry.msg = {}", msg);
         try {

@@ -1,7 +1,8 @@
-package com.zhengl.rabbitmq.pubsub;
+package com.zhengl.rabbitmq.client.listening;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
-import com.zhengl.rabbitmq.pojo.MessageBody;
+import com.zhengl.rabbitmq.client.config.QueueConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -20,8 +21,8 @@ import java.io.IOException;
 @Component
 public class PubSub {
 
-    @RabbitListener(queues = PubSubConfig.PUBSUB_QUEUE_1)
-    public void pubsubQueue1(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.PUBSUB_QUEUE_1)
+    public void pubsubQueue1(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){
@@ -47,8 +48,8 @@ public class PubSub {
         }
     }
 
-    @RabbitListener(queues = PubSubConfig.PUBSUB_QUEUE_1)
-    public void pubsubQueue1_2(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.PUBSUB_QUEUE_1)
+    public void pubsubQueue1_2(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){
@@ -74,8 +75,8 @@ public class PubSub {
         }
     }
 
-    @RabbitListener(queues = PubSubConfig.PUBSUB_QUEUE_2)
-    public void pubsubQueue2(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.PUBSUB_QUEUE_2)
+    public void pubsubQueue2(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){

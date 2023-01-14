@@ -1,7 +1,8 @@
-package com.zhengl.rabbitmq.simple;
+package com.zhengl.rabbitmq.client.listening;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
-import com.zhengl.rabbitmq.pojo.MessageBody;
+import com.zhengl.rabbitmq.client.config.QueueConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -13,8 +14,8 @@ import java.io.IOException;
 @Slf4j
 public class Simple {
 
-    @RabbitListener(queues =SimpleConfig.SIMPLE)
-    public void simple(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.SIMPLE)
+    public void simple(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){

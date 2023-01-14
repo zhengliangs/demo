@@ -1,13 +1,13 @@
-package com.zhengl.rabbitmq;
+package com.zhengl.rabbitmq.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoSpringbootRabbitmqApplication {
+public class DemoSpringbootRabbitmqClientApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoSpringbootRabbitmqApplication.class, args);
+        SpringApplication.run(DemoSpringbootRabbitmqClientApplication.class, args);
     }
 
 }

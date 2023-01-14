@@ -1,7 +1,8 @@
-package com.zhengl.rabbitmq.lazy;
+package com.zhengl.rabbitmq.client.listening;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
-import com.zhengl.rabbitmq.pojo.MessageBody;
+import com.zhengl.rabbitmq.client.config.QueueConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -20,16 +21,15 @@ public class Lazy {
     /**
      * 监听延迟队列
      */
-    @RabbitListener(queues = LazyConfig.LAZY_QUEUE)
-    public void lazyQueue(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.LAZY_QUEUE)
+    public void lazyQueue(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){
                 channel.basicAck(deliveryTag, false);
                 return;
             }
-            long time = System.currentTimeMillis() - msg.getTime();
-            log.info("lazyQueue.msg == {}, time == {}", msg, time);
+            log.info("lazyQueue.msg == {}", msg);
             // 确认消息
             channel.basicAck(deliveryTag, false);
         } catch (Exception e) {

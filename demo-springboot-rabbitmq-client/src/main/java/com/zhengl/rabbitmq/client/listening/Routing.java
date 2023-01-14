@@ -1,7 +1,8 @@
-package com.zhengl.rabbitmq.routing;
+package com.zhengl.rabbitmq.client.listening;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
-import com.zhengl.rabbitmq.pojo.MessageBody;
+import com.zhengl.rabbitmq.client.config.QueueConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -13,14 +14,15 @@ import java.io.IOException;
  * routing模式
  *
  * routing模式使用的是Direct（直连）类型的交换机
- * 在routing模式中，将队列和交换机绑定在一起，生成routing key，生产者发送消息时需要指定routing key，交换机会根据routing key将消息投递到与之绑定的队列中
+ * 在routing模式中，将队列和交换机绑定在一起，生成routing key，生产者发送消息时需要指定routing key，交
+ * 换机会根据routing key将消息投递到与之绑定的队列中
  */
 @Slf4j
 @Component
 public class Routing {
 
-    @RabbitListener(queues = RoutingConfig.ROUTING_QUEUE_1)
-    public void routingQueue1(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.ROUTING_QUEUE_1)
+    public void routingQueue1(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){
@@ -46,8 +48,8 @@ public class Routing {
         }
     }
 
-    @RabbitListener(queues = RoutingConfig.ROUTING_QUEUE_1)
-    public void routingQueue1_2(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.ROUTING_QUEUE_1)
+    public void routingQueue1_2(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){
@@ -73,8 +75,8 @@ public class Routing {
         }
     }
 
-    @RabbitListener(queues = RoutingConfig.ROUTING_QUEUE_2)
-    public void routingQueue2(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.ROUTING_QUEUE_2)
+    public void routingQueue2(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             // 睡眠100毫秒
@@ -102,8 +104,8 @@ public class Routing {
         }
     }
 
-    @RabbitListener(queues = RoutingConfig.ROUTING_QUEUE_3)
-    public void routingQueue3(MessageBody msg, Channel channel, Message message){
+    @RabbitListener(queues = QueueConstant.ROUTING_QUEUE_3)
+    public void routingQueue3(JSONObject msg, Channel channel, Message message){
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
             if(msg == null){
