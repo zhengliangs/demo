@@ -1,0 +1,24 @@
+server:
+  port: 33000
+  servlet:
+    context-path: /rabbitmq-server
+
+spring:
+  rabbitmq:
+    addresses: 192.168.110.36:5672
+    username: admin
+    password: admin
+    # 虚拟交换机
+    virtual-host: vhost
+    # 可以确保消息成功发送到交换机
+    publisher-confirm-type: correlated
+
+    # 优先级
+    # spring.rabbitmq.template.mandatory > spring.rabbitmq.publisher-returns
+    # spring.rabbitmq.template.mandatory为true、false时，忽略spring.rabbitmq.publisher-returns
+    # spring.rabbitmq.template.mandatory为null（即不配置）时，由spring.rabbitmq.publisher-returns确定
+    # 可以确保消息在未被队列接收时返回，而不是丢弃
+    publisher-returns: true
+#    template:
+      # 消息在没有被队列接收时，是否强行退回还是直接丢弃
+#      mandatory:
