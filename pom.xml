@@ -35,7 +35,8 @@
     </properties>
 
     <modules>
-        <module>demo-springboot-rabbitmq</module>
+        <module>demo-springboot-rabbitmq-server</module>
+        <module>demo-springboot-rabbitmq-client</module>
         <module>demo-springboot-elasticsearch</module>
         <module>demo-springboot-elastic-job</module>
         <module>demo-springboot-rocketmq</module>
@@ -46,6 +47,7 @@
         <module>demo-rocketmq</module>
         <module>demo-design-mode</module>
         <module>demo-netty</module>
+        <module>demo-messages</module>
     </modules>
 
     <dependencies>
