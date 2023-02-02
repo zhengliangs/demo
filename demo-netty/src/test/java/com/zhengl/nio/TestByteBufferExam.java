@@ -1,8 +1,8 @@
-package com.zhengl.netty;
+package com.zhengl.nio;
 
 import java.nio.ByteBuffer;
 
-import static com.zhengl.netty.ByteBufferUtil.debugAll;
+import static com.zhengl.nio.ByteBufferUtil.debugAll;
 
 public class TestByteBufferExam {
 

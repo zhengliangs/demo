@@ -1,11 +1,11 @@
-package com.zhengl.netty;
+package com.zhengl.nio;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import static com.zhengl.netty.ByteBufferUtil.debugAll;
+import static com.zhengl.nio.ByteBufferUtil.debugAll;
 
 /**
  * 批量读取，channel 的 read 方法支持读取 ByteBuffer 数组

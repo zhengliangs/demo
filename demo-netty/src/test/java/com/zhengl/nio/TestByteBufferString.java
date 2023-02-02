@@ -1,9 +1,9 @@
-package com.zhengl.netty;
+package com.zhengl.nio;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
-import static com.zhengl.netty.ByteBufferUtil.debugAll;
+import static com.zhengl.nio.ByteBufferUtil.debugAll;
 
 public class TestByteBufferString {
 

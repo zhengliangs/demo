@@ -1,4 +1,4 @@
-package com.zhengl.netty;
+package com.zhengl.nio;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +10,7 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.zhengl.netty.ByteBufferUtil.debugRead;
+import static com.zhengl.nio.ByteBufferUtil.debugRead;
 
 /*
     阻塞模式下，accept 的时候就不可以 read ,read 的时候就不可以 accept

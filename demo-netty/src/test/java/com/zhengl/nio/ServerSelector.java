@@ -1,4 +1,4 @@
-package com.zhengl.netty;
+package com.zhengl.nio;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -6,13 +6,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-import static com.zhengl.netty.ByteBufferUtil.debugAll;
-import static com.zhengl.netty.ByteBufferUtil.debugRead;
+import static com.zhengl.nio.ByteBufferUtil.debugAll;
 
 /*
     疑问1: key.attachment(); 得到的 ByteBuffer 中的数据是什么时候写入的?
