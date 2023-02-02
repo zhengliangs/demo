@@ -1,7 +1,5 @@
 package com.zhengl.java.concurrent.completablefuture;
 
-import com.zhengl.concurrent.completablefuture.SmallTool;
-
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -13,10 +11,10 @@ public class WhenComplete {
 
     public static void main(String[] args) {
         CompletableFuture<String> cf = CompletableFuture.supplyAsync(() -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(2000);
+            SmallTool.sleepMillis(2000);
             return "123";
         }).whenComplete((a, q) -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread(a);
+            SmallTool.printTimeAndThread(a);
         });
         String join = cf.join();
         SmallTool.printTimeAndThread(join);

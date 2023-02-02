@@ -1,6 +1,6 @@
 package com.zhengl.java.concurrent.threaninterrupt;
 
-import com.zhengl.concurrent.completablefuture.SmallTool;
+import com.zhengl.java.concurrent.completablefuture.SmallTool;
 
 import java.util.Random;
 

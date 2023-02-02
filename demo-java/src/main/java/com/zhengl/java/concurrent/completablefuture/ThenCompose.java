@@ -1,7 +1,5 @@
 package com.zhengl.java.concurrent.completablefuture;
 
-import com.zhengl.concurrent.completablefuture.SmallTool;
-
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -12,20 +10,20 @@ import java.util.concurrent.CompletableFuture;
 public class ThenCompose {
 
     public static void main(String[] args) {
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("小白进入餐厅");
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("小白点了 番茄炒蛋 + 一碗米饭");
+        SmallTool.printTimeAndThread("小白进入餐厅");
+        SmallTool.printTimeAndThread("小白点了 番茄炒蛋 + 一碗米饭");
 
         CompletableFuture<String> supplyAsync = CompletableFuture.supplyAsync(() -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("厨师炒菜");
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(3000);
+            SmallTool.printTimeAndThread("厨师炒菜");
+            SmallTool.sleepMillis(3000);
             return "番茄炒蛋";
         }).thenComposeAsync(dish -> CompletableFuture.supplyAsync(() -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("服务员打饭");
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(100);
+            SmallTool.printTimeAndThread("服务员打饭");
+            SmallTool.sleepMillis(100);
             return dish + " + 米饭";
         }));
 
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("小白在打王者");
+        SmallTool.printTimeAndThread("小白在打王者");
         SmallTool.printTimeAndThread(String.format("%s 好了,小白开吃", supplyAsync.join()));
     }
 }

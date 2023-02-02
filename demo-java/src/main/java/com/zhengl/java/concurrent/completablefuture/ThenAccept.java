@@ -1,7 +1,5 @@
 package com.zhengl.java.concurrent.completablefuture;
 
-import com.zhengl.concurrent.completablefuture.SmallTool;
-
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -12,15 +10,15 @@ import java.util.concurrent.CompletableFuture;
 public class ThenAccept {
 
     public static void main(String[] args) {
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("接收到请求...");
+        SmallTool.printTimeAndThread("接收到请求...");
 
         CompletableFuture<Void> cf = CompletableFuture.supplyAsync(() -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("查询点什么...");
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(3000);
+            SmallTool.printTimeAndThread("查询点什么...");
+            SmallTool.sleepMillis(3000);
             return "result";
         }).thenAccept(re -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(1000);
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("拿到结果干点什么  " + re);
+            SmallTool.sleepMillis(1000);
+            SmallTool.printTimeAndThread("拿到结果干点什么  " + re);
         });
 
         cf.join();

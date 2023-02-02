@@ -1,7 +1,5 @@
 package com.zhengl.java.concurrent.completablefuture;
 
-import com.zhengl.concurrent.completablefuture.SmallTool;
-
 import java.util.concurrent.CompletableFuture;
 
 /**

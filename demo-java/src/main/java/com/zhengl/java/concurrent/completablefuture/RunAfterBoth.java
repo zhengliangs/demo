@@ -1,7 +1,5 @@
 package com.zhengl.java.concurrent.completablefuture;
 
-import com.zhengl.concurrent.completablefuture.SmallTool;
-
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -12,18 +10,18 @@ import java.util.concurrent.CompletableFuture;
 public class RunAfterBoth {
 
     public static void main(String[] args) {
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("收到请求...");
+        SmallTool.printTimeAndThread("收到请求...");
 
         CompletableFuture<Void> cf = CompletableFuture.supplyAsync(() -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("保存mysql逻辑...");
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(2000);
+            SmallTool.printTimeAndThread("保存mysql逻辑...");
+            SmallTool.sleepMillis(2000);
             return "mysql save succeed";
         }).runAfterBoth(CompletableFuture.supplyAsync(() -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("保存mongodb逻辑...");
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(1000);
+            SmallTool.printTimeAndThread("保存mongodb逻辑...");
+            SmallTool.sleepMillis(1000);
             return "mongodb save succeed";
         }), () -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("发送消息...");
+            SmallTool.printTimeAndThread("发送消息...");
         });
 
         cf.join();

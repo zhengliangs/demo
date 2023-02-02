@@ -1,7 +1,5 @@
 package com.zhengl.java.concurrent.thread;
 
-import com.zhengl.concurrent.thread.LoggerUtils;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +58,7 @@ public class TestThreadPoolExecutor {
                 e.printStackTrace();
             }
         }
-        com.zhengl.concurrent.thread.LoggerUtils.main.debug("pool size: {}, queue: {}", threadPool.getPoolSize(), tasks);
+        LoggerUtils.main.debug("pool size: {}, queue: {}", threadPool.getPoolSize(), tasks);
     }
 
     static class MyTask implements Runnable {

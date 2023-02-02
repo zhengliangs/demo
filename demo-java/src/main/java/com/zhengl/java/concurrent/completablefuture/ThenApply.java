@@ -1,7 +1,5 @@
 package com.zhengl.java.concurrent.completablefuture;
 
-import com.zhengl.concurrent.completablefuture.SmallTool;
-
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -12,20 +10,20 @@ import java.util.concurrent.CompletableFuture;
 public class ThenApply {
 
     public static void main(String[] args) {
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("小白吃好了");
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("小白 结账、要求开发票");
+        SmallTool.printTimeAndThread("小白吃好了");
+        SmallTool.printTimeAndThread("小白 结账、要求开发票");
 
         CompletableFuture<String> cf = CompletableFuture.supplyAsync(() -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("服务员收款 500元");
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(2000);
+            SmallTool.printTimeAndThread("服务员收款 500元");
+            SmallTool.sleepMillis(2000);
             return "500";
         }).thenApply(money -> {
-            com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread(String.format("服务员开发票 面额 %s元", money));
-            com.zhengl.concurrent.completablefuture.SmallTool.sleepMillis(100);
+            SmallTool.printTimeAndThread(String.format("服务员开发票 面额 %s元", money));
+            SmallTool.sleepMillis(100);
             return String.format("%s元发票", money);
         });
 
-        com.zhengl.concurrent.completablefuture.SmallTool.printTimeAndThread("小白 接到朋友的电话，想一起打游戏");
+        SmallTool.printTimeAndThread("小白 接到朋友的电话，想一起打游戏");
         SmallTool.printTimeAndThread(String.format("小白拿到%s，准备回家", cf.join()));
     }
 }
