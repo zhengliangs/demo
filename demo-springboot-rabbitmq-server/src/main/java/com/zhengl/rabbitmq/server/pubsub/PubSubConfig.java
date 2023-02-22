@@ -1,4 +1,4 @@
-package com.zhengl.rabbitmq.server.routing.pubsub;
+package com.zhengl.rabbitmq.server.pubsub;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

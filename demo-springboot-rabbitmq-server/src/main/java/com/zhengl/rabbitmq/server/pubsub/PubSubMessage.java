@@ -1,4 +1,4 @@
-package com.zhengl.rabbitmq.server.routing.pubsub;
+package com.zhengl.rabbitmq.server.pubsub;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

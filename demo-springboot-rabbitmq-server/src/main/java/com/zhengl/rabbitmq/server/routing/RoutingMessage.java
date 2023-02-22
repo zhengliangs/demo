@@ -1,7 +1,6 @@
 package com.zhengl.rabbitmq.server.routing;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zhengl.rabbitmq.server.pojo.MessageBody;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

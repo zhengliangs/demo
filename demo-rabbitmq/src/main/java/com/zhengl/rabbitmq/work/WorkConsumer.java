@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
  **/
 public class WorkConsumer {
 
-    public static final String QUEUE_NAME = "work";
+    public static final String QUEUE_NAME = "work1";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         // 获取信道

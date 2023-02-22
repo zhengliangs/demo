@@ -10,14 +10,16 @@ import java.util.concurrent.TimeoutException;
 public class RabbitUtils {
 
     public static Channel getChannel() throws IOException, TimeoutException {
-        //连接工厂
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.110.21");
-        factory.setUsername("admin");;
-        factory.setPassword("admin");
-        //创建连接
-        Connection connection = factory.newConnection();
-        //获取信道
+        // 连接工厂
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost("192.168.110.36");
+        connectionFactory.setPort(5672);
+        connectionFactory.setVirtualHost("vhost");
+        connectionFactory.setUsername("admin");;
+        connectionFactory.setPassword("admin");
+        // 创建连接
+        Connection connection = connectionFactory.newConnection();
+        // 获取信道
         return connection.createChannel();
     }
 }

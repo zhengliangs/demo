@@ -1,29 +1,27 @@
 package com.zhengl.rabbitmq.hello;
 
 import com.rabbitmq.client.*;
+import com.zhengl.rabbitmq.utils.RabbitUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class Consumer {
+public class HelloConsumer {
 
     public static final String QUEUE_NAME = "hello";
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.10.34");
-        factory.setUsername("guest");
-        factory.setPassword("guest");
-        Connection connection = factory.newConnection();
         // 创建信道
-        Channel channel = connection.createChannel();
+        Channel channel = RabbitUtils.getChannel();
 
         DeliverCallback deliverCallback = (consumerTag, message) -> {
             System.out.println("consumerTag == " + consumerTag);
             System.out.println(new String(message.getBody()));
         };
 
-        CancelCallback cancelCallback = System.out::println;
+        CancelCallback cancelCallback = (consumerTag) -> {
+            System.out.println("consumerTag == " + consumerTag);
+        };
 
         /*
             1. 队列名称
