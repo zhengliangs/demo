@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="person" class="com.zhengl.spring.basic.Person">
+        <property name="id" value="1"/>
+        <property name="name" value="张三"/>
+    </bean>
+
+    <bean id="person1" class="com.zhengl.spring.basic.Person" p:name="李四" p:id="2"/>
+
+    <!--    引用 properties 文件-->
+    <context:property-placeholder location="classpath:/db.properties"/>
+
+    <bean id="conn" class="com.zhengl.spring.factorybean.ConnectionFactoryBean">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--  实例工厂 -->
+    <bean id="connFactory" class="com.zhengl.spring.factorybean.ConnectionFactory"/>
+    <!--  factory-bean 指定实例工厂
+          factory-method 指定工厂中的方法
+    -->
+    <bean id="connFac" factory-bean="connFactory" factory-method="getConnection"/>
+
+    <!--  静态工厂
+          直接指定工厂内的方法就可以，因为工厂内的方法是静态的，所以不需要创建工厂对象
+    -->
+    <bean id="connStaFac" class="com.zhengl.spring.factorybean.StaticConnectionFactory" factory-method="getConnection"/>
+
+    <!--                类型转换器               -->
+
+    <bean id="myConverter" class="com.zhengl.spring.converter.MyConverter">
+        <property name="pattern" value="yyyy-MM-dd"/>
+    </bean>
+
+    <!-- ConversionServiceFactoryBean 在定义id 属性的时候必须为 conversionService -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="order" class="com.zhengl.spring.converter.Order">
+        <property name="id" value="1"/>
+        <property name="releaseDate" value="2023-03-08"/>
+    </bean>
+</beans>
