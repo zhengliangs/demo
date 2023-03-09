@@ -1,4 +1,4 @@
-server:
+ server:
   port: 33001
   servlet:
     context-path: /rabbitmq-client
