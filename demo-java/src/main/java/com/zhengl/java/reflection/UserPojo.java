@@ -1,6 +1,6 @@
 package com.zhengl.java.reflection;
 
-import com.zhengl.annotation.MyAnnotation;
+import com.zhengl.java.annotation.MyAnnotation;
 
 /**
  * @author hero良
