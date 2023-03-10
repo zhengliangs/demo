@@ -1,6 +1,7 @@
 package com.zhengl.spring;
 
 import com.zhengl.spring.basic.Person;
+import com.zhengl.spring.beanpost.Category;
 import com.zhengl.spring.converter.Order;
 import com.zhengl.spring.factorybean.ConnectionFactoryBean;
 import org.junit.Test;
@@ -62,5 +63,14 @@ public class SpringTest {
         Order order = (Order) ctx.getBean("order");
 
         System.out.println("order = " + order);
+    }
+
+    // BeanPostProcessor
+    @Test
+    public void test7() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+        Category category = (Category) ctx.getBean("category");
+
+        System.out.println("category = " + category.toString());
     }
 }
