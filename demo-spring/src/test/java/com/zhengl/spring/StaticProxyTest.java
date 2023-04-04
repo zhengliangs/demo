@@ -1,11 +1,11 @@
 package com.zhengl.spring;
 
-import com.zhengl.spring.proxy.User;
-import com.zhengl.spring.proxy.UserService;
-import com.zhengl.spring.proxy.UserServiceProxy;
+import com.zhengl.spring.staticproxy.User;
+import com.zhengl.spring.staticproxy.UserService;
+import com.zhengl.spring.staticproxy.UserServiceProxy;
 import org.junit.Test;
 
-public class ProxyTest {
+public class StaticProxyTest {
 
     @Test
     public void test1(){

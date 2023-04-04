@@ -1,6 +1,6 @@
-package com.zhengl.spring.proxy;
+package com.zhengl.spring.staticproxy;
 
-public class UserServiceProxy implements UserService{
+public class UserServiceProxy implements UserService {
 
     private UserService userService = new UserServiceImpl();
 

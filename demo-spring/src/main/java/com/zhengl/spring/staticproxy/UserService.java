@@ -1,4 +1,4 @@
-package com.zhengl.spring.proxy;
+package com.zhengl.spring.staticproxy;
 
 public interface UserService {
 
