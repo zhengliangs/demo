@@ -1,6 +1,8 @@
 package com.zhengl.java.test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -80,30 +82,31 @@ public class MyTest {
 
     /**
      * 毫秒转时分秒
+     *
      * @author hero良
      */
     @Test
-    public void t6(){
+    public void t6() {
         long milli = 123;
         long days = milli / 1000 / 60 / 60 / 24;
-        long daysRound = (long)Math.floor(days);
+        long daysRound = (long) Math.floor(days);
         long hours = milli / 1000 / 60 / 60 - (24 * daysRound);
-        long hoursRound = (long)Math.floor(hours);
+        long hoursRound = (long) Math.floor(hours);
         long minutes = milli / 1000 / 60 - (24 * 60 * daysRound) - (60 * hoursRound);
-        long minutesRound = (long)Math.floor(minutes);
+        long minutesRound = (long) Math.floor(minutes);
         long seconds = milli / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound);
 
         StringBuilder sb = new StringBuilder();
-        if(daysRound > 0){
+        if (daysRound > 0) {
             sb.append(daysRound).append("天");
         }
-        if(hoursRound > 0){
+        if (hoursRound > 0) {
             sb.append(hoursRound).append("时");
         }
-        if(minutesRound> 0){
+        if (minutesRound > 0) {
             sb.append(minutesRound).append("分");
         }
-        if(seconds> 0){
+        if (seconds > 0) {
             sb.append(seconds).append("秒");
         }
         System.out.println(sb);
@@ -113,10 +116,11 @@ public class MyTest {
      * 测试如果 sdf 格式是  yyyy-M-d H:m:s，
      * 如果时间是 2021-08-11 00:00:00 format 之后是 2021-8-5 0:0:0
      * 如果时间是 2021-10-11 22:26:37 format 之后是 2021-10-11 22:26:37
+     *
      * @author hero 良
      */
     @Test
-    public void t7(){
+    public void t7() {
         // 2021-08-11 00:00:00
         long l = 1633962397000L;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:m:s");
@@ -125,21 +129,27 @@ public class MyTest {
 
     /**
      * 将科学计数法的值转为正常数
+     *
      * @author hero 良
      */
     @Test
-    public void t8(){
-        double num = 8.2347983984297E7;
-        System.out.println(new BigDecimal(num+""));//82347983.984297
+    public void t8() {
+        double num = 7.260143832639999E8;
+        BigDecimal bigDecimal = new BigDecimal(num + "");
+        System.out.println("bigDecimal == " + bigDecimal);//82347983.984297
+
+        BigDecimal bigDecimal1 = bigDecimal.setScale(2, RoundingMode.UP);
+        System.out.println("bigDecimal1 = " + bigDecimal1);
     }
 
     /**
      * 验证 j++ 在循环中执行赋值效果
+     *
      * @author hero良
      * @date 2022/4/26
      */
     @Test
-    public void t9(){
+    public void t9() {
         int j = 0;
         for (int i = 0; i < 10; i++) {
             j = (j++);
@@ -151,11 +161,12 @@ public class MyTest {
 
     /**
      * 验证给定字符串是否是数字
+     *
      * @author hero良
      * @date 2022/7/8
      */
     @Test
-    public void t10(){
+    public void t10() {
         Pattern pattern = Pattern.compile("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
         String str = "/";
         System.out.println("str = " + pattern.matcher(str).matches());
@@ -176,7 +187,7 @@ public class MyTest {
     }
 
     @Test
-    public void t11(){
+    public void t11() {
         List<String> list = new ArrayList<>();
         list.add("A");
         list.add("B");
@@ -187,6 +198,39 @@ public class MyTest {
             String s = list.get(i);
             System.out.println(s);
         }
+    }
+
+    /**
+     * 得到两个指定日期中间的日期
+     * @author hero良
+     * @date 2023/3/31
+     */
+    @Test
+    public void t12() {
+        // 声明保存日期集合
+        List<String> list = new ArrayList<>();
+        String startTime = "2022-01-01", endTime = "2023-03-31";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            // 转化成日期类型
+            Date startDate = sdf.parse(startTime);
+            Date endDate = sdf.parse(endTime);
+            //用Calendar 进行日期比较判断
+            Calendar calendar = Calendar.getInstance();
+            while (startDate.getTime() <= endDate.getTime()) {
+                // 把日期添加到集合
+                list.add(sdf.format(startDate));
+                // 设置日期
+                calendar.setTime(startDate);
+                // 把日期增加一天
+                calendar.add(Calendar.DATE, 1);
+                // 获取增加后的日期
+                startDate = calendar.getTime();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println("list = " + list);
     }
 
 }
