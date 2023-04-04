@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="com.zhengl.spring.staticproxy.UserServiceImpl"/>
+
+    <!--                动态代理               -->
+
+    <!-- MethodBeforeAdvice  前置通知-->
+<!--    <bean id="before" class="com.zhengl.spring.dynamic.Before"/>-->
+
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pc" expression="execution(* *(..))"/>-->
+<!--        <aop:advisor advice-ref="before" pointcut-ref="pc"/>-->
+<!--    </aop:config>-->
+
+    <!-- MethodInterceptor 前、后、前后 都可以执行额外功能-->
+    <bean id="around" class="com.zhengl.spring.dynamic.Around"/>
+
+    <aop:config>
+        <!-- execution(方法修饰符(可选)  返回类型 类路径 方法名 参数  异常模式(可选)) -->
+        <aop:pointcut id="pc" expression="execution(* *(..))"/>
+        <aop:advisor advice-ref="around" pointcut-ref="pc"/>
+    </aop:config>
+</beans>
