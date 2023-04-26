@@ -1,7 +1,7 @@
 package com.zhengl.spring;
 
 import com.zhengl.spring.basic.Person;
-import com.zhengl.spring.beanpost.Category;
+import com.zhengl.spring.beanpostprocessor.Category;
 import com.zhengl.spring.converter.Order;
 import com.zhengl.spring.factorybean.ConnectionFactoryBean;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class SpringTest {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Person person = (Person) ctx.getBean("person");
 
-        System.out.println("person = " + person.toString());
+        System.out.println("person = " + person);
     }
 
     // 获取复杂对象
@@ -38,39 +38,55 @@ public class SpringTest {
         System.out.println("conn = " + conn);
     }
 
-    // 实例工厂
+    /**
+     * 实例工厂
+     * @author hero良
+     * @date 2023/3/9
+     */
     @Test
-    public void test4() {
+    public void factory() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Connection connFac = (Connection) ctx.getBean("connFac");
 
         System.out.println("connFac = " + connFac);
     }
 
-    // 静态工厂
+    /**
+     * 静态工厂
+     * @author hero良
+     * @date 2023/3/9
+     */
     @Test
-    public void test5() {
+    public void staticFactory() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
         Connection connStaFac = (Connection) ctx.getBean("connStaFac");
 
         System.out.println("connStaFac = " + connStaFac);
     }
 
-    // 类型转换器
+    /**
+     * Converter 自定义类型转换器
+     * @author hero良
+     * @date 2023/3/9
+     */
     @Test
-    public void test6() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    public void myConverter() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext-converter.xml");
         Order order = (Order) ctx.getBean("order");
 
         System.out.println("order = " + order);
     }
 
-    // BeanPostProcessor
+    /**
+     * BeanPostProcessor
+     * @author hero良
+     * @date 2023/3/10
+     */
     @Test
-    public void test7() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext.xml");
+    public void myBeanPostProcessor() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext-beanPostProcessor.xml");
         Category category = (Category) ctx.getBean("category");
 
-        System.out.println("category = " + category.toString());
+        System.out.println("category = " + category);
     }
 }
