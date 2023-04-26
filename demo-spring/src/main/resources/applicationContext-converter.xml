@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--                类型转换器               -->
+    <bean id="myConverter" class="com.zhengl.spring.converter.MyConverter">
+        <property name="pattern" value="yyyy-MM-dd"/>
+    </bean>
+    <!-- ConversionServiceFactoryBean 在定义id 属性的时候必须为 conversionService -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="order" class="com.zhengl.spring.converter.Order">
+        <property name="id" value="1"/>
+        <property name="releaseDate" value="2023-03-08"/>
+    </bean>
+
+</beans>

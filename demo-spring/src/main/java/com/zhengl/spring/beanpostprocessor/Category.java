@@ -1,9 +1,13 @@
-package com.zhengl.spring.beanpost;
+package com.zhengl.spring.beanpostprocessor;
 
 public class Category {
 
     private Integer id;
     private String name;
+
+    public Category() {
+        System.out.println(" 构造方法  ");
+    }
 
     public Integer getId() {
         return id;

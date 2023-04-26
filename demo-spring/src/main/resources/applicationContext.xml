@@ -22,50 +22,14 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-
-
     <!--  实例工厂 -->
     <bean id="connFactory" class="com.zhengl.spring.factorybean.ConnectionFactory"/>
     <!--  factory-bean 指定实例工厂
           factory-method 指定工厂中的方法 -->
     <bean id="connFac" factory-bean="connFactory" factory-method="getConnection"/>
 
-
-
-
     <!--  静态工厂
           直接指定工厂内的方法就可以，因为工厂内的方法是静态的，所以不需要创建工厂对象 -->
     <bean id="connStaFac" class="com.zhengl.spring.factorybean.StaticConnectionFactory" factory-method="getConnection"/>
-
-
-
-    <!--                类型转换器               -->
-    <bean id="myConverter" class="com.zhengl.spring.converter.MyConverter">
-        <property name="pattern" value="yyyy-MM-dd"/>
-    </bean>
-    <!-- ConversionServiceFactoryBean 在定义id 属性的时候必须为 conversionService -->
-    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <ref bean="myConverter"/>
-            </set>
-        </property>
-    </bean>
-
-    <bean id="order" class="com.zhengl.spring.converter.Order">
-        <property name="id" value="1"/>
-        <property name="releaseDate" value="2023-03-08"/>
-    </bean>
-
-
-
-    <!--                BeanPostProcessor               -->
-    <!-- 对Spring工厂创建的对象，进行再加工 -->
-    <bean id="category" class="com.zhengl.spring.beanpost.Category">
-        <property name="id" value="1"/>
-        <property name="name" value="xiaojr"/>
-    </bean>
-
-    <bean id="myBeanPost" class="com.zhengl.spring.beanpost.MyBeanPostProcessor"/>
 
 </beans>

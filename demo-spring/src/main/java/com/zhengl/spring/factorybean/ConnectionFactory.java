@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * 实例工厂
+ * @author hero良
+ * @date 2023/3/9
+ */
 public class ConnectionFactory {
 
     public Connection getConnection() {

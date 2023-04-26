@@ -1,10 +1,10 @@
-package com.zhengl.spring.dynamic;
+package com.zhengl.spring.dynamicproxy;
 
 import org.springframework.aop.MethodBeforeAdvice;
 
 import java.lang.reflect.Method;
 
-public class Before implements MethodBeforeAdvice {
+public class MyMethodBeforeAdvice implements MethodBeforeAdvice {
 
     /*
         Method: 额外功能所增加给的那个原始方法(login/register)

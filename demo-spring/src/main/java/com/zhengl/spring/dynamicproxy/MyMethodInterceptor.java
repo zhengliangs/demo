@@ -1,9 +1,9 @@
-package com.zhengl.spring.dynamic;
+package com.zhengl.spring.dynamicproxy;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-public class Around implements MethodInterceptor {
+public class MyMethodInterceptor implements MethodInterceptor {
 
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {

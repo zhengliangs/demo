@@ -5,6 +5,11 @@ import org.springframework.beans.factory.FactoryBean;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * 通过ApplicationContext配置文件来给成员变量赋值
+ * @author hero良
+ * @date 2023/3/9
+ */
 public class ConnectionFactoryBean implements FactoryBean<Connection> {
 
     private String driverClassName;
