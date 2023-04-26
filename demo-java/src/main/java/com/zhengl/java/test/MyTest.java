@@ -233,4 +233,54 @@ public class MyTest {
         System.out.println("list = " + list);
     }
 
+    @Test
+    public void t13() throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+        calendar.setTime(format.parse("2023-04"));
+        //本月
+        Calendar calendarThisMonth = (Calendar) calendar.clone();
+        Date thisMonthBegin = calendarThisMonth.getTime();
+        calendarThisMonth.add(Calendar.MONTH, 1);
+        calendarThisMonth.add(Calendar.DATE, -1);
+        Date thisMonthEnd = calendarThisMonth.getTime();
+
+        //年度同期
+        calendar.add(Calendar.YEAR, -1);
+        Date preYearMonthBegin = calendar.getTime();
+        calendar.add(Calendar.MONTH, 1);
+        calendar.add(Calendar.DATE, -1);
+        Date preYearMonthEnd = calendar.getTime();
+        System.out.println("preYearMonthEnd = " + preYearMonthEnd);
+
+        List<Date> list = new ArrayList<>();
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(format.parse("2023-04"));
+        int maxDay = calendar1.getActualMaximum(Calendar.DAY_OF_MONTH);
+        for (int i = 1; i <= maxDay; i++) {
+            Calendar calendarDay = (Calendar) calendar1.clone();
+            calendarDay.set(Calendar.DATE, i);
+            list.add(calendarDay.getTime());
+        }
+        System.out.println("list = " + list);
+    }
+
+    @Test
+    public void t14() throws ParseException {
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "11");
+        map.put("2", "22");
+        map.put("3", "44");
+
+        List<String> list = new ArrayList<>();
+        list.add("2");
+
+        for (String str : list) {
+            String s = map.get(str);
+            map.remove(str);
+        }
+        System.out.println(map);
+    }
+
+
 }
