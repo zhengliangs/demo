@@ -24,7 +24,7 @@ elasticjob:
   jobs:
     fileBackupJob:
       # 文件备份任务
-      elasticJobClass: com.zhengl.elasticjob.job.DemoJob
+      elasticJobClass: com.zhengl.elasticjob.job.FileBackupJob
       # cron表达式，用于控制作业触发时间
       cron: 0 1/1 * * * ?
       # 作业分片总数
@@ -63,4 +63,17 @@ elasticjob:
 #          connectTimeoutMilliseconds: 6000
 #          # 从企业微信服务器读取到可用资源的超时时间 默认 5000 毫秒
 #          readTimeoutMilliseconds: 10000
+
+    demoJob:
+      elasticJobClass: com.zhengl.elasticjob.job.DemoJob
+      cron: 0 18 1 * * ?
+      shardingTotalCount: 1
+      shardingItemParameters:
+      failover: true
+      misfire: true
+      overwrite: true
+      job-sharding-strategy-type: AVG_ALLOCATION
+      monitor-execution: true
+      max-time-diff-seconds: 5
+      disabled: true
 
