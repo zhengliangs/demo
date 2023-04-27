@@ -15,9 +15,6 @@ public class CGlibTest {
         // 1. 需要先创建原始对象
         UserService userService = new UserServiceImpl();
 
-        /*
-         *
-         */
         Enhancer enhancer = new Enhancer();
         enhancer.setClassLoader(CGlibTest.class.getClassLoader());
         enhancer.setSuperclass(userService.getClass());

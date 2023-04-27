@@ -8,7 +8,7 @@ public class MyMethodInterceptor implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 
-        System.out.println("-----额外功能 log-----");
+        System.out.println("-----around log-----");
         Object ret = methodInvocation.proceed();
 
         return ret;

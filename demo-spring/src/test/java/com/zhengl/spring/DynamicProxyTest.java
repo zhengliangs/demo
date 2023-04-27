@@ -16,7 +16,7 @@ public class DynamicProxyTest {
      */
     @Test
     public void test1(){
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext-proxy.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext-dynamicProxy.xml");
         UserService service = (UserService) ctx.getBean("userService");
 
         service.login("name", "password");

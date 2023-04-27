@@ -7,20 +7,16 @@
 
     <bean id="userService" class="com.zhengl.spring.staticproxy.UserServiceImpl"/>
 
-    <!-- MethodBeforeAdvice  前置通知-->
+    <!-- MethodBeforeAdvice -->
 <!--    <bean id="before" class="com.zhengl.spring.dynamicproxy.MyMethodBeforeAdvice"/>-->
 
-<!--    <aop:config>-->
-<!--        <aop:pointcut id="pc" expression="execution(* *(..))"/>-->
-<!--        <aop:advisor advice-ref="before" pointcut-ref="pc"/>-->
-<!--    </aop:config>-->
-
-    <!-- MethodInterceptor 前、后、前后 都可以执行额外功能-->
+    <!-- MethodInterceptor -->
     <bean id="around" class="com.zhengl.spring.dynamicproxy.MyMethodInterceptor"/>
 
     <aop:config>
         <!-- execution(方法修饰符(可选)  返回类型 类路径 方法名 参数  异常模式(可选)) -->
         <aop:pointcut id="pc" expression="execution(* *(..))"/>
+<!--        <aop:advisor advice-ref="before" pointcut-ref="pc"/>&ndash;&gt;-->
         <aop:advisor advice-ref="around" pointcut-ref="pc"/>
     </aop:config>
 </beans>
