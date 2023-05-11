@@ -45,7 +45,7 @@ public class HttpClient {
      * get调用
      * @author hero良
      */
-    public static void getInvoking(String url) {
+    public static String getInvoking(String url) {
         try(CloseableHttpClient httpClient = HttpClientBuilder.create().build()){
             HttpGet httpGet = new HttpGet(url);
             httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36");
@@ -53,8 +53,7 @@ public class HttpClient {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
                 // 返回json格式
-                String res = EntityUtils.toString(response.getEntity());
-                System.out.println(res);
+                return EntityUtils.toString(response.getEntity());
             } else {
                 System.out.println(" getInvoking.url == " + url);
                 System.out.println(" getInvoking.statusCode == " + statusCode);
@@ -62,6 +61,7 @@ public class HttpClient {
         } catch (Exception e){
             e.printStackTrace();
         }
+        return "";
     }
 
 }
