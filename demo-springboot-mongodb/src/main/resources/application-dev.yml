@@ -1,0 +1,8 @@
+spring:
+  # mongodb 配置
+  data:
+    mongodb:
+      # mongodb://用户名:密码@ip:port,ip:port/数据库名?replicaSet=副本集名称
+      uri: mongodb://root:123456@192.168.217.64:28018,192.168.217.67:28018,192.168.217.66:28018/cloudreedb?replicaSet=cloudree&readPreference=secondaryPreferred&maxStalenessSeconds=120
+
+

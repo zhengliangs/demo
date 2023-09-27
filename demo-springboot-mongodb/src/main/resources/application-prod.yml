@@ -1,0 +1,8 @@
+spring:
+  # mongodb 配置
+  data:
+    mongodb:
+      uri: mongodb://root:123456@10.34.181.11:28018,10.34.181.2:28018,10.34.181.3:28018/cloudreedb?replicaSet=cloudree&readPreference=secondaryPreferred&maxStalenessSeconds=120
+
+
+
