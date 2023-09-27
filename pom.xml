@@ -30,7 +30,7 @@
         <commons-httpclient.version>3.1</commons-httpclient.version>
         <elastic-job.version>3.0.1</elastic-job.version>
         <rocketmq-spring-boot.version>2.2.0</rocketmq-spring-boot.version>
-        <rocketmq-client.version>4.9.1</rocketmq-client.version>
+        <rocketmq-client.version>5.1.1</rocketmq-client.version>
         <elastic-job-lite-core.version>2.1.5</elastic-job-lite-core.version>
     </properties>
 
@@ -49,6 +49,7 @@
         <module>demo-netty</module>
         <module>demo-messages</module>
         <module>demo-spring</module>
+        <module>demo-springboot-mongodb</module>
     </modules>
 
     <!-- 依赖版本号 -->
