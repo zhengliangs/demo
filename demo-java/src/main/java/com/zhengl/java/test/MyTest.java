@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -202,6 +203,7 @@ public class MyTest {
 
     /**
      * 得到两个指定日期中间的日期
+     *
      * @author hero良
      * @date 2023/3/31
      */
@@ -265,22 +267,60 @@ public class MyTest {
         System.out.println("list = " + list);
     }
 
+    /**
+     * 测试使用lambda表达式过滤之后原集合中是否还存在符合过滤条件的数据
+     * 原集合中数据不会发生变化
+     *
+     * @author hero良
+     */
     @Test
-    public void t14() throws ParseException {
-        Map<String, String> map = new HashMap<>();
-        map.put("1", "11");
-        map.put("2", "22");
-        map.put("3", "44");
+    public void t14() {
+        List<TestEntity> list = new ArrayList<>();
 
-        List<String> list = new ArrayList<>();
-        list.add("2");
+        list.add(new TestEntity("1", "zhangsan"));
+        list.add(new TestEntity("2", "lishi"));
+        list.add(new TestEntity("3", "wangwu"));
 
-        for (String str : list) {
-            String s = map.get(str);
-            map.remove(str);
-        }
-        System.out.println(map);
+        List<TestEntity> filterList = list.stream().filter(e -> "lishi".equals(e.getName())).collect(Collectors.toList());
+        System.out.println(list);
     }
 
+    @Test
+    public void t15() {
+        /**
+         * 根据日期字符串判断当年第几周
+         */
+        Calendar calendar = Calendar.getInstance();
+        // 设置星期一为一周开始的第一天
+        calendar.setFirstDayOfWeek(Calendar.SATURDAY);
+        // 获得当前的时间戳
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        // 获得当前的年
+        int weekYear = calendar.get(Calendar.YEAR);
+        // 获得当前日期属于今年的第几周
+        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+        for (int i = 1; i <= weekOfYear; i++) {
+            // 获得指定年的第几周的开始日期
+            calendar.setWeekDate(weekYear, i, Calendar.SATURDAY);
+            // 创建日期的时间该周的第一天，
+            Date startTime = calendar.getTime();
+            // 获得指定年的第几周的结束日期
+            calendar.setWeekDate(weekYear, i, Calendar.FRIDAY);
+            Date endTime = calendar.getTime();
+
+        }
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String dateStart = simpleDateFormat.format(starttime);//将时间戳格式化为指定格式
+//        String dateEnd = simpleDateFormat.format(endtime);
+//        System.out.println(dateStart);
+//        System.out.println(dateEnd);
+    }
+
+    @Test
+    public void t16() {
+        double dou = 0.0;
+        double dou1 = 1;
+        System.out.println(dou/dou1);
+    }
 
 }
