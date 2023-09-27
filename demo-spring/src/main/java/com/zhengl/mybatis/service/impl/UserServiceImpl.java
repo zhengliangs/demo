@@ -25,4 +25,9 @@ public class UserServiceImpl implements UserService {
         System.out.println("flag = " + flag);
         throw new RuntimeException("模拟异常，事务回滚");
     }
+
+    @Override
+    public boolean login(String name, String password) {
+        return false;
+    }
 }
