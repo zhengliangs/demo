@@ -17,7 +17,7 @@ public class TestByteBuffer {
             while (true) {
                 // 从 channel 读取数据，向 buffer 写入数据
                 int len = channel.read(buffer);
-                log.debug("读到的字节数 = {}", len);
+                log.info("读取到的字节数 = {}", len);
                 // -1 表示数据读完了
                 if (len == -1){
                     break;
@@ -29,12 +29,17 @@ public class TestByteBuffer {
                     // 从 buffer 读数据
                     byte b = buffer.get();
                     // 打印 buffer 内容
-                    log.debug("实际字节 = {}", (char) b);
+                    char ch = (char) b;
+                    log.info("实际字节 = {}", ch);
+                    if ('3' == ch) {
+                        buffer.compact();
+                        break;
+                    }
                 }
-                // clear 切换至写模式
-//                buffer.clear();
+                // 切换至写模式
+                // buffer.clear();
                 // 切换至写模式，会压缩没有读完的数据，再次写入的时候不会覆盖掉未读的数据
-                buffer.compact();
+                 buffer.compact();
             }
         } catch (IOException e) {
             e.printStackTrace();

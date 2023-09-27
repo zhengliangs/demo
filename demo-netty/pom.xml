@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!-- netty 依赖 -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>

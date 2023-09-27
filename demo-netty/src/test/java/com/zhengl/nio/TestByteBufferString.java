@@ -5,6 +5,10 @@ import java.nio.charset.StandardCharsets;
 
 import static com.zhengl.nio.ByteBufferUtil.debugAll;
 
+/**
+ * bytebuffer和String的互转
+ * @author hero良
+ */
 public class TestByteBufferString {
 
     public static void main(String[] args) {

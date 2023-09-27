@@ -22,6 +22,7 @@ public class TestByteBufferReadWrite {
         System.out.println("buffer.get() == " + buffer.get());
         debugAll(buffer);
 
+        // 调用clear或者compact时候，并不会清空buffer的数据，但是position的位置会改变，然后将新写入的数据覆盖掉旧位置的数据
         buffer.clear();
         buffer.put((byte) 0x65);
         debugAll(buffer);

@@ -16,7 +16,7 @@ import static com.zhengl.nio.ByteBufferUtil.debugRead;
     阻塞模式下，accept 的时候就不可以 read ,read 的时候就不可以 accept
  */
 @Slf4j
-public class ServerSync {
+public class ServerBlock {
 
     public static void main(String[] args) throws IOException {
         ByteBuffer buffer = ByteBuffer.allocate(16);
@@ -38,6 +38,7 @@ public class ServerSync {
                 log.debug("before read...{}", channel);
                 // 阻塞方法，线程会停止运行
                 channel.read(buffer);
+                // 切换到读模式
                 buffer.flip();
                 debugRead(buffer);
                 buffer.clear();

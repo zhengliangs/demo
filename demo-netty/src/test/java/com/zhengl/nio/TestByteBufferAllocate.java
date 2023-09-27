@@ -8,7 +8,7 @@ public class TestByteBufferAllocate {
         // class java.nio.HeapByteBuffer
         System.out.println(ByteBuffer.allocate(16).getClass());
 
-        //class java.nio.DirectByteBuffer
+        // class java.nio.DirectByteBuffer
         System.out.println(ByteBuffer.allocateDirect(16).getClass());
 
         /*

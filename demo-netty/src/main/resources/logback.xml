@@ -1,38 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration
-        xmlns="http://ch.qos.logback/xml/ns/logback"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback logback.xsd">
-    <!-- 输出控制，格式控制-->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<!--
+    debug：当此属性为true时,将打印logback内部日志信息,实时查看logback运行状态,默认为false
+    scan：当此属性为true时,配置文件如果发生改变将会被重新加载,默认值为true
+    scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位为毫秒；当scan为true时，此属性生效；默认的时间间隔为1分钟
+-->
+<configuration debug="false" scan="true" scanPeriod="60 seconds">
+    <!--上下文名称-->
+    <contextName>logback</contextName>
+    <!--定义日志文件路径，可以是绝对路径（以/开头，/home/app/logs），也可以是相对路径（app/logs）-->
+    <property name="logPath" value="logs"/>
+    <!--定义日志文件名称-->
+    <property name="logName" value="netty"/>
+    <!--
+        定义日志格式
+        %d：时间，其它时间格式-> %d{yyyy-MM-dd HH:mm:ss.SSS}  %d{yyyy-MM-dd}
+        %-5level：日志级别
+        %thread：线程名
+        %logger{50}：日志发生类全类名,最长50个字符
+        %line：行号
+        %msg：日志信息
+        %n：换行
+    -->
+    <property name="logPattern" value="%d [%thread] %-5level %logger{50} %line - %msg%n"/>
+
+    <!--输出控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date{HH:mm:ss} [%-5level] [%thread] %logger{17} - %m%n </pattern>
+            <!--输出格式-->
+            <pattern>${logPattern}</pattern>
         </encoder>
     </appender>
-    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        &lt;!&ndash; 日志文件名称 &ndash;&gt;
-        <file>logFile.log</file>
+
+    <!--输出到文件，时间滚动输出-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--文件名-->
+        <file>${logPath}/${logName}.log</file>
+        <!--日志记录器的滚动策略，按日期记录-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            &lt;!&ndash; 每天产生一个新的日志文件 &ndash;&gt;
-            <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-            &lt;!&ndash; 保留 15 天的日志 &ndash;&gt;
-            <maxHistory>15</maxHistory>
+            <!--前一天日志文件对应的文件名-->
+            <fileNamePattern>${logPath}/${logName}-%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
-            <pattern>%date{HH:mm:ss} [%-5level] [%thread] %logger{17} - %m%n </pattern>
+            <!--输出格式-->
+            <pattern>${logPattern}</pattern>
         </encoder>
-    </appender>-->
+    </appender>
 
-    <!-- 用来控制查看那个类的日志内容（对mybatis name 代表命名空间） -->
-    <logger name="com.zhengl.netty" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT"/>
-    </logger>
-
-    <logger name="io.netty.handler.logging.LoggingHandler" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT"/>
-    </logger>
-
-    <root level="ERROR">
-        <appender-ref ref="STDOUT"/>
+    <!-- level 输出日志级别，想要输出到控制台或文件必须在下面引用 -->
+    <root level="debug">
+        <appender-ref ref="console"/>
+<!--        <appender-ref ref="file"/>-->
     </root>
+
 </configuration>
