@@ -7,10 +7,18 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class TestEventLoopGroup {
+public class TestEventLoop {
 
     public static void main(String[] args) {
-        EventLoopGroup group = new NioEventLoopGroup();
+        // io 事件、普通任务、定时任务
+        EventLoopGroup group = new NioEventLoopGroup(2);
+        // 普通任务、定时任务
+//        EventLoopGroup group = new DefaultEventLoopGroup();
+
+        System.out.println(group.next());
+        System.out.println(group.next());
+        System.out.println(group.next());
+        System.out.println(group.next());
 
         // 普通任务
         // submit | execute

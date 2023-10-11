@@ -12,22 +12,29 @@ import io.netty.handler.codec.string.StringDecoder;
 public class HelloServer {
 
     public static void main(String[] args) {
+        // 1. 启动器，负责组装 netty 组件，启动服务器
         new ServerBootstrap()
+             // 2. group 组
             .group(new NioEventLoopGroup())
+             // 3. 选择服务器的 ServerSocketChannel 实现
             .channel(NioServerSocketChannel.class)
+             // 4. boos 负责处理连接，worker(child)负责处理读写，决定了worker(child)能执行那些操作(handler)
             .childHandler(
+                // 5. channel 代表和客户端数据读写的通道 Initializer 初始化，负责添加别的 handler
                 new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new StringDecoder());
-                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
-                        @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                protected void initChannel(NioSocketChannel ch) {
+                    // 6. 添加的具体的 handler
+                    ch.pipeline().addLast(new StringDecoder()); // 将 ByteBuf 转为字符串
+                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter() { // 自定义 handler
+                        @Override // 读事件
+                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             System.out.println(msg);
                         }
                     });
                 }
             })
-            .bind(8181);
+                // 7. 绑定监听端口
+            .bind(8080);
     }
 }

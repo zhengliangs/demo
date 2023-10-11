@@ -11,18 +11,25 @@ import java.net.InetSocketAddress;
 public class HelloClient {
 
     public static void main(String[] args) throws InterruptedException {
+        // 1. 启动类
         new Bootstrap()
+                // 2. 添加 EventLoop
                 .group(new NioEventLoopGroup())
+                // 3. 选择客户端 channel 实现
                 .channel(NioSocketChannel.class)
+                // 4. 添加处理器
                 .handler(new ChannelInitializer<NioSocketChannel>() {
-                    @Override
-                    protected void initChannel(NioSocketChannel ch) throws Exception {
+                    @Override // 在连接建龙后被调用
+                    protected void initChannel(NioSocketChannel ch) {
                         ch.pipeline().addLast(new StringEncoder());
                     }
                 })
-                .connect(new InetSocketAddress("localhost", 8181))
+                // 5. 连接到服务器
+                .connect(new InetSocketAddress("localhost", 8080))
+                // 阻塞方法，直到连接建立
                 .sync()
                 .channel()
+                // 6. 向服务器发送数据
                 .writeAndFlush("hello world");
     }
 }

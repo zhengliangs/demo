@@ -21,7 +21,8 @@
         %msg：日志信息
         %n：换行
     -->
-    <property name="logPattern" value="%d [%thread] %-5level %logger{50} %line - %msg%n"/>
+<!--    <property name="logPattern" value="%d [%thread] %-5level %logger{50} %line - %msg%n"/>-->
+    <property name="logPattern" value="%date{HH:mm:ss} [%-5level] [%thread] %logger{17} - %m%n"/>
 
     <!--输出控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -46,10 +47,14 @@
         </encoder>
     </appender>
 
-    <!-- level 输出日志级别，想要输出到控制台或文件必须在下面引用 -->
-    <root level="debug">
+    <!-- 用来控制查看那个类的日志内容（对mybatis name 代表命名空间） -->
+    <logger name="com.zhengl.netty" level="DEBUG" additivity="false">
         <appender-ref ref="console"/>
-<!--        <appender-ref ref="file"/>-->
+    </logger>
+
+    <!-- level 输出日志级别，想要输出到控制台或文件必须在下面引用 -->
+    <root level="error">
+        <appender-ref ref="console"/>
     </root>
 
 </configuration>
