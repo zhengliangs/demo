@@ -52,6 +52,10 @@
         <appender-ref ref="console"/>
     </logger>
 
+    <logger name="com.zhengl.netty" level="DEBUG" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+
     <!-- level 输出日志级别，想要输出到控制台或文件必须在下面引用 -->
     <root level="error">
         <appender-ref ref="console"/>
